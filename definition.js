@@ -44,20 +44,6 @@ define([], function () {
 							expression: "always"
 	
 						},
-						animation: {
-							type: "boolean",
-							component: "switch",
-							label: "Enable Animation",
-							ref: "animation",
-							options: [{
-								value: true,
-								label: "On"
-							}, {
-								value: false,
-								label: "Off"
-							}],
-							defaultValue: false
-						},
 						interactions: {
 							type: "boolean",
 							component: "switch",

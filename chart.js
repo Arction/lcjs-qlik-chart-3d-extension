@@ -4,11 +4,12 @@ define( [ "qlik", "./lib/lcjs.iife",],
    
     return {
 
-        buildChart: async function ($element, layout, _self) {l
+        buildChart: async function ($element, layout, _self) {
             
-            try {
-            let lastrow = {}
-            lastrow.row = 0
+        try {
+            let lastrow = {
+                row: 0
+            }
             let columns = layout.qHyperCube.qDimensionInfo.length + layout.qHyperCube.qMeasureInfo.length;
             this.addMoreData(_self, lastrow)
             await this.getData(_self, lastrow, layout, columns);
@@ -40,7 +41,7 @@ define( [ "qlik", "./lib/lcjs.iife",],
                         qTop: lastrow.row + 1,
                         qLeft: 0,
                         qWidth: colcount,
-                        qHeight: Math.min(Math.floor(10000 / colcount), _self.backendApi.getRowCount() - lastrow.row)
+                        qHeight: Math.min(Math.floor(1000 / colcount), _self.backendApi.getRowCount() - lastrow.row)
                     }];
                     _self.backendApi.getData(requestPage).then(function (dataPages) {
                         _this.addMoreData(_self, lastrow);
@@ -60,15 +61,14 @@ define( [ "qlik", "./lib/lcjs.iife",],
                 lightningChart,
                 ColorHEX,
                 SolidFill,
-                SolidLine,
                 PointStyle3D,
             } = lcjs
             
             const chart = lightningChart().Chart3D({
                 container: 'lightningChart2'
             })
+                .setAnimationsEnabled(false)
                 .setTitle(layout.chartTitle)
-                .setAnimationsEnabled(layout.animation)
                 .setMouseInteractions(layout.interactions)
             
             chart.getDefaultAxisY()
@@ -80,19 +80,20 @@ define( [ "qlik", "./lib/lcjs.iife",],
             chart.getDefaultAxisZ()
                 .setTitle(layout.zTitle)
             
-            const series = chart.addBoxSeries()
-            .setRoundedEdges( layout.size )
-            
+            const series = chart.addPointSeries()
+            .setPointStyle(new PointStyle3D.Triangulated({
+                fillStyle: new SolidFill({ color: ColorHEX(layout.color.color) }),
+                size:  layout.size ,
+                shape: 'sphere'
+            }))
+
             self.backendApi.eachDataRow(function (rownum, row) {      
 
-                series.invalidateData([{
-                    xCenter: row[0].qNum,
-                    yCenter: row[1].qNum,
-                    zCenter: row[2].qNum,
-                    xSize: layout.size,
-                    ySize: layout.size,
-                    zSize: layout.size,
-                }])
+                series.add({ 
+                    x: row[0].qNum,
+                    z: row[2].qNum, 
+                    y: row[1].qNum 
+                })
             
             })
 
