@@ -64,8 +64,10 @@ define( [ "qlik", "./lib/lcjs.iife",],
                 PointStyle3D,
             } = lcjs
             
+            const id = layout.qInfo.qId;
+
             const chart = lightningChart().Chart3D({
-                container: 'lightningChart2'
+                container: '3DlightningChart' + id
             })
                 .setAnimationsEnabled(false)
                 .setTitle(layout.chartTitle)

@@ -32,7 +32,9 @@ function ( qlik, definition, chart) {
 		}],
 		paint: function ($element, layout) {
 
-			$element.html(`<div id="lightningChart2" style="height:${height($element[0])}px"></div>`)
+			const id = layout.qInfo.qId;
+
+			$element.html(`<div id="3DlightningChart${id}" style="height:${height($element[0])}px"></div>`)
 
 			chart.buildChart($element, layout, this).then(function() {
 				return qlik.Promise.resolve();

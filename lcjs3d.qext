@@ -1,6 +1,6 @@
 {
-	"name": "lcjs3d",
-	"description": "Basic visualization 3D chart",
+	"name": "LightningChart JS 3D Chart",
+	"description": "High performance 3D scatter chart",
 	"type": "visualization",
 	"version": "1.0.0",
 	"icon": "extension",
