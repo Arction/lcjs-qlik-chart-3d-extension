@@ -1,0 +1,15 @@
+{
+	"name": "LightningChart JS 3D Chart",
+	"description": "High performance 3D scatter chart",
+	"type": "visualization",
+	"version": "1.0.0",
+	"icon": "scatter-chart",
+	"author": "Arction Ltd",
+	"homepage": "https://www.arction.com",
+	"keywords": "qlik-sense, visualization, 3D, qlik-cloud, chart",
+	"license": "MIT",
+	"repository": "",
+	"dependencies": {
+		"qlik-sense": ">=3.0.x"
+	}
+}
